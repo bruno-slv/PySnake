@@ -41,6 +41,17 @@ class Snake:
 
         self.size = len(self.body)
 
+    def set_direction(self, new_direction):
+        opposites = {
+            Direction.LEFT: Direction.RIGHT,
+            Direction.RIGHT: Direction.LEFT,
+            Direction.UP: Direction.DOWN,
+            Direction.DOWN: Direction.UP
+        }
+
+        if opposites[new_direction] != self.direction:
+            self.direction = new_direction
+
     def update(self):
         head = self.body[0]
         
@@ -133,13 +144,13 @@ def snkloop():
 
                 if snake.is_alive():
                     if c in ('d', 'D', '<RIGHT>'):
-                        snake.direction = Direction.RIGHT
+                        snake.set_direction(Direction.RIGHT)
                     if c in ('a', 'A', '<LEFT>'):
-                        snake.direction = Direction.LEFT
+                        snake.set_direction(Direction.LEFT)
                     if c in ('w', 'W', '<UP>'):
-                        snake.direction = Direction.UP
+                        snake.set_direction(Direction.UP)
                     if c in ('s', 'S', '<DOWN>'):
-                        snake.direction = Direction.DOWN
+                        snake.set_direction(Direction.DOWN)
 
                     snake.render(table)
 
