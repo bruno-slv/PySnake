@@ -83,7 +83,7 @@ class Snake:
         
         auto_collision = any(
             self.head_position.x == part.x and self.head_position.y == part.y
-            for part in self.body[1:]
+            for part in self.body[1:-1]
         )
 
         return is_inside_viewport and not auto_collision
@@ -139,10 +139,10 @@ def snkloop():
 
                 if c == '<ESC>':
                     break
-                
-                snake.update()
 
                 if snake.is_alive():
+                    snake.update()
+
                     if c in ('d', 'D', '<RIGHT>'):
                         snake.set_direction(Direction.RIGHT)
                     if c in ('a', 'A', '<LEFT>'):
